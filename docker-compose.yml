@@ -3,7 +3,10 @@ services:
   db:
     image: postgres:14-alpine
     environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
       POSTGRES_PASSWORD: ${PG_PASSWORD}
+    volumes:
+      - /mnt/42CC6B144201C850/PGDB:/var/lib/postgresql/data
   adminer:
     image: adminer
     ports:
@@ -13,8 +16,6 @@ services:
     environment:
       PG_PASSWORD: ${PG_PASSWORD}
       PG_CONNECTION_STRING: jdbc:postgresql://db:5432/postgres
-    volumes:
-      - /mnt/42CC6B144201C850/h2db:/app/h2db
     ports:
       - "8080:8080"
     depends_on:
