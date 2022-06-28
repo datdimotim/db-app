@@ -1,19 +1,17 @@
+/* (C)2022 */
 package com.dimotim.spring.content.app.entities;
 
 import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import org.springframework.content.commons.annotations.ContentId;
-import org.springframework.content.commons.annotations.ContentLength;
-import org.springframework.content.commons.annotations.MimeType;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.content.commons.annotations.ContentId;
+import org.springframework.content.commons.annotations.ContentLength;
+import org.springframework.content.commons.annotations.MimeType;
 
 @Entity
 @Getter
@@ -21,14 +19,15 @@ import lombok.Setter;
 @NoArgsConstructor
 public class File {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	private String name;
-	private Date created = new Date();
-	private String summary;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-	@ContentId private String contentId;
-	@ContentLength private long contentLength;
-	@MimeType private String contentMimeType = "text/plain";
+    private String name;
+    private Date created = new Date();
+    private String summary;
+
+    @ContentId private String contentId;
+    @ContentLength private long contentLength;
+    @MimeType private String contentMimeType = "text/plain";
 }

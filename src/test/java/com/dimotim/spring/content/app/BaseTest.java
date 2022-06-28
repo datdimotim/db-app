@@ -1,3 +1,4 @@
+/* (C)2022 */
 package com.dimotim.spring.content.app;
 
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -17,13 +18,15 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @Testcontainers
 public abstract class BaseTest {
 
-    public static PostgreSQLContainer<?> postgreDBContainer = new PostgreSQLContainer<>("postgres:14-alpine");
+    public static PostgreSQLContainer<?> postgreDBContainer =
+            new PostgreSQLContainer<>("postgres:14-alpine");
 
     static {
         postgreDBContainer.start();
     }
 
-    public static class DockerPostgreDataSourceInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
+    public static class DockerPostgreDataSourceInitializer
+            implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 
         @Override
         public void initialize(ConfigurableApplicationContext applicationContext) {
@@ -32,8 +35,7 @@ public abstract class BaseTest {
                     applicationContext,
                     "spring.datasource.url=" + postgreDBContainer.getJdbcUrl(),
                     "spring.datasource.username=" + postgreDBContainer.getUsername(),
-                    "spring.datasource.password=" + postgreDBContainer.getPassword()
-            );
+                    "spring.datasource.password=" + postgreDBContainer.getPassword());
         }
     }
 }
