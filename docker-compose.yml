@@ -10,6 +10,9 @@ services:
       - "8081:8081"
   app:
     build: .
+    environment:
+      PG_PASSWORD: ${PG_PASSWORD}
+      PG_CONNECTION_STRING: jdbc:postgresql://db:5432/postgres
     volumes:
       - /mnt/42CC6B144201C850/h2db:/app/h2db
     ports:
