@@ -6,11 +6,11 @@ services:
       PGDATA: /var/lib/postgresql/data/pgdata
       POSTGRES_PASSWORD: ${PG_PASSWORD}
     volumes:
-      - /mnt/42CC6B144201C850/PGDB:/var/lib/postgresql/data
-  adminer:
-    image: adminer
-    ports:
-      - "8081:8081"
+      - ${DB_VOLUME}:/var/lib/postgresql/data
+  #adminer:
+  #  image: adminer
+  #  ports:
+  #    - "8081:8081"
   app:
     build: .
     environment:
