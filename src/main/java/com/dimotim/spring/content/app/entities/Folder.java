@@ -2,22 +2,20 @@
 package com.dimotim.spring.content.app.entities;
 
 import java.util.Date;
+import java.util.Set;
 import java.util.UUID;
 import javax.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.content.commons.annotations.ContentId;
-import org.springframework.content.commons.annotations.ContentLength;
-import org.springframework.content.commons.annotations.MimeType;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class File {
+public class Folder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,13 +26,13 @@ public class File {
     private Date created = new Date();
     private String summary;
 
-    @ContentId private UUID contentId;
-
-    @ContentLength private long contentLength;
-
-    @MimeType private String contentMimeType = "text/plain";
-
     @ManyToOne
     @JoinColumn(name = "parent_id")
     private Folder parent;
+
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
+    private Set<Folder> childs;
+
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
+    private Set<File> files;
 }
