@@ -13,6 +13,8 @@ import com.github.paulcwarren.ginkgo4j.Ginkgo4jSpringRunner;
 import com.jayway.restassured.RestAssured;
 import java.io.ByteArrayInputStream;
 import java.util.Optional;
+import java.util.UUID;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpStatus;
 import org.hamcrest.Matchers;
@@ -56,7 +58,7 @@ public class GettingStartedTest extends BaseTest {
                                 It(
                                         "should be able to associate content with the Entity",
                                         () -> {
-                                            Long fid = file.getId();
+                                            UUID fid = file.getId();
 
                                             given().multiPart(
                                                             "file",
