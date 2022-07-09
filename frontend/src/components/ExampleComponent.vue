@@ -6,6 +6,11 @@
         {{ todo.id }} - {{ todo.content }}
       </li>
     </ul>
+    <ul>
+      <li v-for="file in fileList" :key="file.id">
+        {{ file.id }} - {{ file.name }}
+      </li>
+    </ul>
     <p>Count: {{ todoCount }} / {{ meta.totalCount }}</p>
     <p>Active: {{ active ? 'yes' : 'no' }}</p>
     <p>Clicks on todos: {{ clickCount }}</p>
@@ -22,6 +27,7 @@ import {
   Ref,
 } from 'vue';
 import { Todo, Meta } from './models';
+import {EntityModelFile, FileEntityControllerService} from 'src/clients';
 
 function useClickCount() {
   const clickCount = ref(0);
@@ -58,7 +64,15 @@ export default defineComponent({
     }
   },
   setup(props) {
-    return { ...useClickCount(), ...useDisplayTodo(toRef(props, 'todos')) };
+    return {
+      ...useClickCount(),
+      ...useDisplayTodo(toRef(props, 'todos')),
+      fileList: ref([] as EntityModelFile[])
+    };
   },
+  async mounted() {
+    const response = await FileEntityControllerService.getCollectionResourceFileGet1()
+    this.fileList = response._embedded?.files || []
+  }
 });
 </script>
