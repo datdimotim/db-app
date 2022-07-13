@@ -1,1 +1,2222 @@
-{"openapi":"3.0.1","info":{"title":"OpenAPI definition","version":"v0"},"servers":[{"url":"http://localhost:8080","description":"Generated server url"}],"paths":{"/files":{"get":{"tags":["file-entity-controller"],"description":"get-file","operationId":"getCollectionResource-file-get_1","parameters":[{"name":"page","in":"query","description":"Zero-based page index (0..N)","required":false,"schema":{"minimum":0,"type":"integer","default":0}},{"name":"size","in":"query","description":"The size of the page to be returned","required":false,"schema":{"minimum":1,"type":"integer","default":20}},{"name":"sort","in":"query","description":"Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.","required":false,"schema":{"type":"array","items":{"type":"string"}}}],"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/PagedModelEntityModelFile"}},"application/x-spring-data-compact+json":{"schema":{"$ref":"#/components/schemas/PagedModelEntityModelFile"}},"text/uri-list":{"schema":{"type":"string"}}}}}},"post":{"tags":["file-entity-controller"],"description":"create-file","operationId":"postCollectionResource-file-post","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/FileRequestBody"}}},"required":true},"responses":{"201":{"description":"Created","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/EntityModelFile"}}}}}}},"/files/search/findAllByNameLike":{"get":{"tags":["file-search-controller"],"operationId":"executeSearch-file-get","parameters":[{"name":"name","in":"query","schema":{"type":"string"}}],"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/CollectionModelEntityModelFile"}}}},"404":{"description":"Not Found"}}}},"/files/{id}":{"get":{"tags":["file-entity-controller"],"description":"get-file","operationId":"getItemResource-file-get","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/EntityModelFile"}}}},"404":{"description":"Not Found"}}},"put":{"tags":["file-entity-controller"],"description":"update-file","operationId":"putItemResource-file-put","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/FileRequestBody"}}},"required":true},"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/EntityModelFile"}}}},"201":{"description":"Created","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/EntityModelFile"}}}},"204":{"description":"No Content"}}},"delete":{"tags":["file-entity-controller"],"description":"delete-file","operationId":"deleteItemResource-file-delete","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"204":{"description":"No Content"},"404":{"description":"Not Found"}}},"patch":{"tags":["file-entity-controller"],"description":"patch-file","operationId":"patchItemResource-file-patch","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/FileRequestBody"}}},"required":true},"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/EntityModelFile"}}}},"204":{"description":"No Content"}}}},"/files/{id}/parent":{"get":{"tags":["file-property-reference-controller"],"description":"get-folder-by-file-Id","operationId":"followPropertyReference-file-get_1","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/EntityModelFolder"}},"text/uri-list":{"schema":{"type":"string"}}}},"404":{"description":"Not Found"}}},"put":{"tags":["file-property-reference-controller"],"description":"update-folder-by-file-Id","operationId":"createPropertyReference-file-put","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CollectionModelObject"}},"application/x-spring-data-compact+json":{"schema":{"$ref":"#/components/schemas/CollectionModelObject"}},"text/uri-list":{"schema":{"type":"string"}}},"required":true},"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/EntityModelFolder"}}}},"201":{"description":"Created","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/EntityModelFolder"}}}},"204":{"description":"No Content"}}},"delete":{"tags":["file-property-reference-controller"],"description":"delete-folder-by-file-Id","operationId":"deletePropertyReference-file-delete","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"204":{"description":"No Content"},"404":{"description":"Not Found"}}},"patch":{"tags":["file-property-reference-controller"],"description":"patch-folder-by-file-Id","operationId":"createPropertyReference-file-patch","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CollectionModelObject"}},"application/x-spring-data-compact+json":{"schema":{"$ref":"#/components/schemas/CollectionModelObject"}},"text/uri-list":{"schema":{"type":"string"}}},"required":true},"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/EntityModelFolder"}}}},"204":{"description":"No Content"}}}},"/files/{id}/parent/{propertyId}":{"get":{"tags":["file-property-reference-controller"],"description":"get-folder-by-file-Id","operationId":"followPropertyReference-file-get","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}},{"name":"propertyId","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/EntityModelFolder"}}}},"404":{"description":"Not Found"}}},"delete":{"tags":["file-property-reference-controller"],"description":"delete-folder-by-file-Id","operationId":"deletePropertyReferenceId-file-delete","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}},{"name":"propertyId","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"204":{"description":"No Content"},"404":{"description":"Not Found"}}}},"/folders":{"get":{"tags":["folder-entity-controller"],"description":"get-folder","operationId":"getCollectionResource-folder-get_1","parameters":[{"name":"page","in":"query","description":"Zero-based page index (0..N)","required":false,"schema":{"minimum":0,"type":"integer","default":0}},{"name":"size","in":"query","description":"The size of the page to be returned","required":false,"schema":{"minimum":1,"type":"integer","default":20}},{"name":"sort","in":"query","description":"Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.","required":false,"schema":{"type":"array","items":{"type":"string"}}}],"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/PagedModelEntityModelFolder"}},"application/x-spring-data-compact+json":{"schema":{"$ref":"#/components/schemas/PagedModelEntityModelFolder"}},"text/uri-list":{"schema":{"type":"string"}}}}}},"post":{"tags":["folder-entity-controller"],"description":"create-folder","operationId":"postCollectionResource-folder-post","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/FolderRequestBody"}}},"required":true},"responses":{"201":{"description":"Created","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/EntityModelFolder"}}}}}}},"/folders/search/findAllByNameLike":{"get":{"tags":["folder-search-controller"],"operationId":"executeSearch-folder-get","parameters":[{"name":"name","in":"query","schema":{"type":"string"}}],"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/CollectionModelEntityModelFolder"}}}},"404":{"description":"Not Found"}}}},"/folders/{id}":{"get":{"tags":["folder-entity-controller"],"description":"get-folder","operationId":"getItemResource-folder-get","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/EntityModelFolder"}}}},"404":{"description":"Not Found"}}},"put":{"tags":["folder-entity-controller"],"description":"update-folder","operationId":"putItemResource-folder-put","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/FolderRequestBody"}}},"required":true},"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/EntityModelFolder"}}}},"201":{"description":"Created","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/EntityModelFolder"}}}},"204":{"description":"No Content"}}},"delete":{"tags":["folder-entity-controller"],"description":"delete-folder","operationId":"deleteItemResource-folder-delete","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"204":{"description":"No Content"},"404":{"description":"Not Found"}}},"patch":{"tags":["folder-entity-controller"],"description":"patch-folder","operationId":"patchItemResource-folder-patch","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/FolderRequestBody"}}},"required":true},"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/EntityModelFolder"}}}},"204":{"description":"No Content"}}}},"/folders/{id}/childs":{"get":{"tags":["folder-property-reference-controller"],"description":"get-folder-by-folder-Id","operationId":"followPropertyReference-folder-get_1","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/CollectionModelFolder"}},"text/uri-list":{"schema":{"type":"string"}}}},"404":{"description":"Not Found"}}},"put":{"tags":["folder-property-reference-controller"],"description":"update-folder-by-folder-Id","operationId":"createPropertyReference-folder-put","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CollectionModelObject"}},"application/x-spring-data-compact+json":{"schema":{"$ref":"#/components/schemas/CollectionModelObject"}},"text/uri-list":{"schema":{"type":"string"}}},"required":true},"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/CollectionModelFolder"}}}},"201":{"description":"Created","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/CollectionModelFolder"}}}},"204":{"description":"No Content"}}},"delete":{"tags":["folder-property-reference-controller"],"description":"delete-folder-by-folder-Id","operationId":"deletePropertyReference-folder-delete","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"204":{"description":"No Content"},"404":{"description":"Not Found"}}},"patch":{"tags":["folder-property-reference-controller"],"description":"patch-folder-by-folder-Id","operationId":"createPropertyReference-folder-patch","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CollectionModelObject"}},"application/x-spring-data-compact+json":{"schema":{"$ref":"#/components/schemas/CollectionModelObject"}},"text/uri-list":{"schema":{"type":"string"}}},"required":true},"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/CollectionModelFolder"}}}},"204":{"description":"No Content"}}}},"/folders/{id}/childs/{propertyId}":{"get":{"tags":["folder-property-reference-controller"],"description":"get-folder-by-folder-Id","operationId":"followPropertyReference-folder-get","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}},{"name":"propertyId","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/CollectionModelFolder"}}}},"404":{"description":"Not Found"}}},"delete":{"tags":["folder-property-reference-controller"],"description":"delete-folder-by-folder-Id","operationId":"deletePropertyReferenceId-folder-delete","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}},{"name":"propertyId","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"204":{"description":"No Content"},"404":{"description":"Not Found"}}}},"/folders/{id}/files":{"get":{"tags":["folder-property-reference-controller"],"description":"get-file-by-folder-Id","operationId":"followPropertyReference-folder-get_2_1","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/CollectionModelFile"}},"text/uri-list":{"schema":{"type":"string"}}}},"404":{"description":"Not Found"}}},"put":{"tags":["folder-property-reference-controller"],"description":"update-file-by-folder-Id","operationId":"createPropertyReference-folder-put_1","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CollectionModelObject"}},"application/x-spring-data-compact+json":{"schema":{"$ref":"#/components/schemas/CollectionModelObject"}},"text/uri-list":{"schema":{"type":"string"}}},"required":true},"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/CollectionModelFile"}}}},"201":{"description":"Created","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/CollectionModelFile"}}}},"204":{"description":"No Content"}}},"delete":{"tags":["folder-property-reference-controller"],"description":"delete-file-by-folder-Id","operationId":"deletePropertyReference-folder-delete_1","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"204":{"description":"No Content"},"404":{"description":"Not Found"}}},"patch":{"tags":["folder-property-reference-controller"],"description":"patch-file-by-folder-Id","operationId":"createPropertyReference-folder-patch_1","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CollectionModelObject"}},"application/x-spring-data-compact+json":{"schema":{"$ref":"#/components/schemas/CollectionModelObject"}},"text/uri-list":{"schema":{"type":"string"}}},"required":true},"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/CollectionModelFile"}}}},"204":{"description":"No Content"}}}},"/folders/{id}/files/{propertyId}":{"get":{"tags":["folder-property-reference-controller"],"description":"get-file-by-folder-Id","operationId":"followPropertyReference-folder-get_2","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}},{"name":"propertyId","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/CollectionModelFile"}}}},"404":{"description":"Not Found"}}},"delete":{"tags":["folder-property-reference-controller"],"description":"delete-file-by-folder-Id","operationId":"deletePropertyReferenceId-folder-delete_1","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}},{"name":"propertyId","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"204":{"description":"No Content"},"404":{"description":"Not Found"}}}},"/folders/{id}/parent":{"get":{"tags":["folder-property-reference-controller"],"description":"get-folder-by-folder-Id","operationId":"followPropertyReference-folder-get_3_1","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/EntityModelFolder"}},"text/uri-list":{"schema":{"type":"string"}}}},"404":{"description":"Not Found"}}},"put":{"tags":["folder-property-reference-controller"],"description":"update-folder-by-folder-Id","operationId":"createPropertyReference-folder-put_2","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CollectionModelObject"}},"application/x-spring-data-compact+json":{"schema":{"$ref":"#/components/schemas/CollectionModelObject"}},"text/uri-list":{"schema":{"type":"string"}}},"required":true},"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/EntityModelFolder"}}}},"201":{"description":"Created","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/EntityModelFolder"}}}},"204":{"description":"No Content"}}},"delete":{"tags":["folder-property-reference-controller"],"description":"delete-folder-by-folder-Id","operationId":"deletePropertyReference-folder-delete_2","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"204":{"description":"No Content"},"404":{"description":"Not Found"}}},"patch":{"tags":["folder-property-reference-controller"],"description":"patch-folder-by-folder-Id","operationId":"createPropertyReference-folder-patch_2","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/CollectionModelObject"}},"application/x-spring-data-compact+json":{"schema":{"$ref":"#/components/schemas/CollectionModelObject"}},"text/uri-list":{"schema":{"type":"string"}}},"required":true},"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/EntityModelFolder"}}}},"204":{"description":"No Content"}}}},"/folders/{id}/parent/{propertyId}":{"get":{"tags":["folder-property-reference-controller"],"description":"get-folder-by-folder-Id","operationId":"followPropertyReference-folder-get_3","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}},{"name":"propertyId","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/EntityModelFolder"}}}},"404":{"description":"Not Found"}}},"delete":{"tags":["folder-property-reference-controller"],"description":"delete-folder-by-folder-Id","operationId":"deletePropertyReferenceId-folder-delete_2","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"string"}},{"name":"propertyId","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"204":{"description":"No Content"},"404":{"description":"Not Found"}}}},"/profile":{"get":{"tags":["profile-controller"],"operationId":"listAllFormsOfMetadata_1","responses":{"200":{"description":"OK","content":{"application/hal+json":{"schema":{"$ref":"#/components/schemas/RepresentationModelObject"}}}}}}},"/profile/files":{"get":{"tags":["profile-controller"],"operationId":"descriptor_1_1_1","responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"type":"string"}},"application/alps+json":{"schema":{"type":"string"}},"application/schema+json":{"schema":{"$ref":"#/components/schemas/JsonSchema"}}}}}}},"/profile/folders":{"get":{"tags":["profile-controller"],"operationId":"descriptor_1_1_2","responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"type":"string"}},"application/alps+json":{"schema":{"type":"string"}},"application/schema+json":{"schema":{"$ref":"#/components/schemas/JsonSchema"}}}}}}}},"components":{"schemas":{"AbstractJsonSchemaPropertyObject":{"type":"object","properties":{"title":{"type":"string"},"readOnly":{"type":"boolean"}}},"Item":{"type":"object","properties":{"type":{"type":"string"},"properties":{"type":"object","additionalProperties":{"$ref":"#/components/schemas/AbstractJsonSchemaPropertyObject"}},"requiredProperties":{"type":"array","items":{"type":"string"}}}},"JsonSchema":{"type":"object","properties":{"title":{"type":"string"},"description":{"type":"string"},"properties":{"type":"object","additionalProperties":{"$ref":"#/components/schemas/AbstractJsonSchemaPropertyObject"}},"requiredProperties":{"type":"array","items":{"type":"string"}},"definitions":{"type":"object","additionalProperties":{"$ref":"#/components/schemas/Item"}},"type":{"type":"string"},"$schema":{"type":"string"}}},"Links":{"type":"object","additionalProperties":{"$ref":"#/components/schemas/Link"}},"RepresentationModelObject":{"type":"object","properties":{"_links":{"$ref":"#/components/schemas/Links"}}},"File":{"type":"object","properties":{"id":{"type":"string","format":"uuid"},"name":{"type":"string"},"created":{"type":"string","format":"date-time"},"summary":{"type":"string"},"contentId":{"type":"string","format":"uuid"},"contentLength":{"type":"integer","format":"int64"},"contentMimeType":{"type":"string"},"parent":{"$ref":"#/components/schemas/Folder"}}},"Folder":{"type":"object","properties":{"id":{"type":"string","format":"uuid"},"name":{"type":"string"},"created":{"type":"string","format":"date-time"},"summary":{"type":"string"},"parent":{"$ref":"#/components/schemas/Folder"},"childs":{"uniqueItems":true,"type":"array","items":{"$ref":"#/components/schemas/Folder"}},"files":{"uniqueItems":true,"type":"array","items":{"$ref":"#/components/schemas/File"}}}},"EntityModelFolder":{"type":"object","properties":{"id":{"type":"string","format":"uuid"},"name":{"type":"string"},"created":{"type":"string","format":"date-time"},"summary":{"type":"string"},"parent":{"$ref":"#/components/schemas/Folder"},"childs":{"uniqueItems":true,"type":"array","items":{"$ref":"#/components/schemas/Folder"}},"files":{"uniqueItems":true,"type":"array","items":{"$ref":"#/components/schemas/File"}},"_links":{"$ref":"#/components/schemas/Links"}}},"PageMetadata":{"type":"object","properties":{"size":{"type":"integer","format":"int64"},"totalElements":{"type":"integer","format":"int64"},"totalPages":{"type":"integer","format":"int64"},"number":{"type":"integer","format":"int64"}}},"PagedModelEntityModelFolder":{"type":"object","properties":{"_embedded":{"type":"object","properties":{"folders":{"type":"array","items":{"$ref":"#/components/schemas/EntityModelFolder"}}}},"_links":{"$ref":"#/components/schemas/Links"},"page":{"$ref":"#/components/schemas/PageMetadata"}}},"CollectionModelObject":{"type":"object","properties":{"_embedded":{"type":"object","properties":{"objects":{"type":"array","items":{"type":"object"}}}},"_links":{"$ref":"#/components/schemas/Links"}}},"CollectionModelFolder":{"type":"object","properties":{"_embedded":{"type":"object","properties":{"folders":{"type":"array","items":{"$ref":"#/components/schemas/FolderResponse"}}}},"_links":{"$ref":"#/components/schemas/Links"}}},"CollectionModelFile":{"type":"object","properties":{"_embedded":{"type":"object","properties":{"files":{"type":"array","items":{"$ref":"#/components/schemas/FileResponse"}}}},"_links":{"$ref":"#/components/schemas/Links"}}},"CollectionModelEntityModelFolder":{"type":"object","properties":{"_embedded":{"type":"object","properties":{"folders":{"type":"array","items":{"$ref":"#/components/schemas/EntityModelFolder"}}}},"_links":{"$ref":"#/components/schemas/Links"}}},"EntityModelFile":{"type":"object","properties":{"id":{"type":"string","format":"uuid"},"name":{"type":"string"},"created":{"type":"string","format":"date-time"},"summary":{"type":"string"},"contentId":{"type":"string","format":"uuid"},"contentLength":{"type":"integer","format":"int64"},"contentMimeType":{"type":"string"},"parent":{"$ref":"#/components/schemas/Folder"},"_links":{"$ref":"#/components/schemas/Links"}}},"PagedModelEntityModelFile":{"type":"object","properties":{"_embedded":{"type":"object","properties":{"files":{"type":"array","items":{"$ref":"#/components/schemas/EntityModelFile"}}}},"_links":{"$ref":"#/components/schemas/Links"},"page":{"$ref":"#/components/schemas/PageMetadata"}}},"CollectionModelEntityModelFile":{"type":"object","properties":{"_embedded":{"type":"object","properties":{"files":{"type":"array","items":{"$ref":"#/components/schemas/EntityModelFile"}}}},"_links":{"$ref":"#/components/schemas/Links"}}},"FileRequestBody":{"type":"object","properties":{"id":{"type":"string","format":"uuid"},"name":{"type":"string"},"created":{"type":"string","format":"date-time"},"summary":{"type":"string"},"contentId":{"type":"string","format":"uuid"},"contentLength":{"type":"integer","format":"int64"},"contentMimeType":{"type":"string"},"parent":{"type":"string"}}},"FolderRequestBody":{"type":"object","properties":{"id":{"type":"string","format":"uuid"},"name":{"type":"string"},"created":{"type":"string","format":"date-time"},"summary":{"type":"string"},"parent":{"type":"string"},"childs":{"type":"array","items":{"type":"string"}},"files":{"type":"array","items":{"type":"string"}}}},"FileResponse":{"type":"object","properties":{"id":{"type":"string","format":"uuid"},"name":{"type":"string"},"created":{"type":"string","format":"date-time"},"summary":{"type":"string"},"contentId":{"type":"string","format":"uuid"},"contentLength":{"type":"integer","format":"int64"},"contentMimeType":{"type":"string"},"parent":{"$ref":"#/components/schemas/Folder"}}},"FolderResponse":{"type":"object","properties":{"id":{"type":"string","format":"uuid"},"name":{"type":"string"},"created":{"type":"string","format":"date-time"},"summary":{"type":"string"},"parent":{"$ref":"#/components/schemas/Folder"},"childs":{"uniqueItems":true,"type":"array","items":{"$ref":"#/components/schemas/Folder"}},"files":{"uniqueItems":true,"type":"array","items":{"$ref":"#/components/schemas/File"}}}},"Link":{"type":"object","properties":{"href":{"type":"string"},"hreflang":{"type":"string"},"title":{"type":"string"},"type":{"type":"string"},"deprecation":{"type":"string"},"profile":{"type":"string"},"name":{"type":"string"},"templated":{"type":"boolean"}}}}}}
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/api/files": {
+      "get": {
+        "tags": [
+          "file-entity-controller"
+        ],
+        "description": "get-file",
+        "operationId": "getCollectionResource-file-get_1",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Zero-based page index (0..N)",
+            "required": false,
+            "schema": {
+              "minimum": 0,
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "The size of the page to be returned",
+            "required": false,
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "default": 20
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedModelEntityModelFile"
+                }
+              },
+              "application/x-spring-data-compact+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedModelEntityModelFile"
+                }
+              },
+              "text/uri-list": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "file-entity-controller"
+        ],
+        "description": "create-file",
+        "operationId": "postCollectionResource-file-post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FileRequestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityModelFile"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/files/search/findAllByNameLike": {
+      "get": {
+        "tags": [
+          "file-search-controller"
+        ],
+        "operationId": "executeSearch-file-get",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionModelEntityModelFile"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/files/{id}": {
+      "get": {
+        "tags": [
+          "file-entity-controller"
+        ],
+        "description": "get-file",
+        "operationId": "getItemResource-file-get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityModelFile"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "file-entity-controller"
+        ],
+        "description": "update-file",
+        "operationId": "putItemResource-file-put",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FileRequestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityModelFile"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityModelFile"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "file-entity-controller"
+        ],
+        "description": "delete-file",
+        "operationId": "deleteItemResource-file-delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "file-entity-controller"
+        ],
+        "description": "patch-file",
+        "operationId": "patchItemResource-file-patch",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FileRequestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityModelFile"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/api/files/{id}/parent": {
+      "get": {
+        "tags": [
+          "file-property-reference-controller"
+        ],
+        "description": "get-folder-by-file-Id",
+        "operationId": "followPropertyReference-file-get_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityModelFolder"
+                }
+              },
+              "text/uri-list": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "file-property-reference-controller"
+        ],
+        "description": "update-folder-by-file-Id",
+        "operationId": "createPropertyReference-file-put",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionModelObject"
+              }
+            },
+            "application/x-spring-data-compact+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionModelObject"
+              }
+            },
+            "text/uri-list": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityModelFolder"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityModelFolder"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "file-property-reference-controller"
+        ],
+        "description": "delete-folder-by-file-Id",
+        "operationId": "deletePropertyReference-file-delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "file-property-reference-controller"
+        ],
+        "description": "patch-folder-by-file-Id",
+        "operationId": "createPropertyReference-file-patch",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionModelObject"
+              }
+            },
+            "application/x-spring-data-compact+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionModelObject"
+              }
+            },
+            "text/uri-list": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityModelFolder"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/api/files/{id}/parent/{propertyId}": {
+      "get": {
+        "tags": [
+          "file-property-reference-controller"
+        ],
+        "description": "get-folder-by-file-Id",
+        "operationId": "followPropertyReference-file-get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "propertyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityModelFolder"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "file-property-reference-controller"
+        ],
+        "description": "delete-folder-by-file-Id",
+        "operationId": "deletePropertyReferenceId-file-delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "propertyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/folders": {
+      "get": {
+        "tags": [
+          "folder-entity-controller"
+        ],
+        "description": "get-folder",
+        "operationId": "getCollectionResource-folder-get_1",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Zero-based page index (0..N)",
+            "required": false,
+            "schema": {
+              "minimum": 0,
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "The size of the page to be returned",
+            "required": false,
+            "schema": {
+              "minimum": 1,
+              "type": "integer",
+              "default": 20
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedModelEntityModelFolder"
+                }
+              },
+              "application/x-spring-data-compact+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedModelEntityModelFolder"
+                }
+              },
+              "text/uri-list": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "folder-entity-controller"
+        ],
+        "description": "create-folder",
+        "operationId": "postCollectionResource-folder-post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FolderRequestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityModelFolder"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/folders/search/findAllByNameLike": {
+      "get": {
+        "tags": [
+          "folder-search-controller"
+        ],
+        "operationId": "executeSearch-folder-get",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionModelEntityModelFolder"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/folders/{id}": {
+      "get": {
+        "tags": [
+          "folder-entity-controller"
+        ],
+        "description": "get-folder",
+        "operationId": "getItemResource-folder-get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityModelFolder"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "folder-entity-controller"
+        ],
+        "description": "update-folder",
+        "operationId": "putItemResource-folder-put",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FolderRequestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityModelFolder"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityModelFolder"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "folder-entity-controller"
+        ],
+        "description": "delete-folder",
+        "operationId": "deleteItemResource-folder-delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "folder-entity-controller"
+        ],
+        "description": "patch-folder",
+        "operationId": "patchItemResource-folder-patch",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FolderRequestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityModelFolder"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/api/folders/{id}/childs": {
+      "get": {
+        "tags": [
+          "folder-property-reference-controller"
+        ],
+        "description": "get-folder-by-folder-Id",
+        "operationId": "followPropertyReference-folder-get_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionModelFolder"
+                }
+              },
+              "text/uri-list": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "folder-property-reference-controller"
+        ],
+        "description": "update-folder-by-folder-Id",
+        "operationId": "createPropertyReference-folder-put",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionModelObject"
+              }
+            },
+            "application/x-spring-data-compact+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionModelObject"
+              }
+            },
+            "text/uri-list": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionModelFolder"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionModelFolder"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "folder-property-reference-controller"
+        ],
+        "description": "delete-folder-by-folder-Id",
+        "operationId": "deletePropertyReference-folder-delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "folder-property-reference-controller"
+        ],
+        "description": "patch-folder-by-folder-Id",
+        "operationId": "createPropertyReference-folder-patch",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionModelObject"
+              }
+            },
+            "application/x-spring-data-compact+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionModelObject"
+              }
+            },
+            "text/uri-list": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionModelFolder"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/api/folders/{id}/childs/{propertyId}": {
+      "get": {
+        "tags": [
+          "folder-property-reference-controller"
+        ],
+        "description": "get-folder-by-folder-Id",
+        "operationId": "followPropertyReference-folder-get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "propertyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionModelFolder"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "folder-property-reference-controller"
+        ],
+        "description": "delete-folder-by-folder-Id",
+        "operationId": "deletePropertyReferenceId-folder-delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "propertyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/folders/{id}/files": {
+      "get": {
+        "tags": [
+          "folder-property-reference-controller"
+        ],
+        "description": "get-file-by-folder-Id",
+        "operationId": "followPropertyReference-folder-get_2_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionModelFile"
+                }
+              },
+              "text/uri-list": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "folder-property-reference-controller"
+        ],
+        "description": "update-file-by-folder-Id",
+        "operationId": "createPropertyReference-folder-put_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionModelObject"
+              }
+            },
+            "application/x-spring-data-compact+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionModelObject"
+              }
+            },
+            "text/uri-list": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionModelFile"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionModelFile"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "folder-property-reference-controller"
+        ],
+        "description": "delete-file-by-folder-Id",
+        "operationId": "deletePropertyReference-folder-delete_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "folder-property-reference-controller"
+        ],
+        "description": "patch-file-by-folder-Id",
+        "operationId": "createPropertyReference-folder-patch_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionModelObject"
+              }
+            },
+            "application/x-spring-data-compact+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionModelObject"
+              }
+            },
+            "text/uri-list": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionModelFile"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/api/folders/{id}/files/{propertyId}": {
+      "get": {
+        "tags": [
+          "folder-property-reference-controller"
+        ],
+        "description": "get-file-by-folder-Id",
+        "operationId": "followPropertyReference-folder-get_2",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "propertyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionModelFile"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "folder-property-reference-controller"
+        ],
+        "description": "delete-file-by-folder-Id",
+        "operationId": "deletePropertyReferenceId-folder-delete_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "propertyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/folders/{id}/parent": {
+      "get": {
+        "tags": [
+          "folder-property-reference-controller"
+        ],
+        "description": "get-folder-by-folder-Id",
+        "operationId": "followPropertyReference-folder-get_3_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityModelFolder"
+                }
+              },
+              "text/uri-list": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "folder-property-reference-controller"
+        ],
+        "description": "update-folder-by-folder-Id",
+        "operationId": "createPropertyReference-folder-put_2",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionModelObject"
+              }
+            },
+            "application/x-spring-data-compact+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionModelObject"
+              }
+            },
+            "text/uri-list": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityModelFolder"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityModelFolder"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "folder-property-reference-controller"
+        ],
+        "description": "delete-folder-by-folder-Id",
+        "operationId": "deletePropertyReference-folder-delete_2",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "folder-property-reference-controller"
+        ],
+        "description": "patch-folder-by-folder-Id",
+        "operationId": "createPropertyReference-folder-patch_2",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionModelObject"
+              }
+            },
+            "application/x-spring-data-compact+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionModelObject"
+              }
+            },
+            "text/uri-list": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityModelFolder"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/api/folders/{id}/parent/{propertyId}": {
+      "get": {
+        "tags": [
+          "folder-property-reference-controller"
+        ],
+        "description": "get-folder-by-folder-Id",
+        "operationId": "followPropertyReference-folder-get_3",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "propertyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityModelFolder"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "folder-property-reference-controller"
+        ],
+        "description": "delete-folder-by-folder-Id",
+        "operationId": "deletePropertyReferenceId-folder-delete_2",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "propertyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/profile": {
+      "get": {
+        "tags": [
+          "profile-controller"
+        ],
+        "operationId": "listAllFormsOfMetadata_1",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/hal+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RepresentationModelObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/profile/files": {
+      "get": {
+        "tags": [
+          "profile-controller"
+        ],
+        "operationId": "descriptor_1_1_1",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/alps+json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/schema+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonSchema"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/profile/folders": {
+      "get": {
+        "tags": [
+          "profile-controller"
+        ],
+        "operationId": "descriptor_1_1_2",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/alps+json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/schema+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonSchema"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AbstractJsonSchemaPropertyObject": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "readOnly": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Item": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/AbstractJsonSchemaPropertyObject"
+            }
+          },
+          "requiredProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "JsonSchema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/AbstractJsonSchemaPropertyObject"
+            }
+          },
+          "requiredProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "definitions": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Item"
+            }
+          },
+          "type": {
+            "type": "string"
+          },
+          "$schema": {
+            "type": "string"
+          }
+        }
+      },
+      "Links": {
+        "type": "object",
+        "additionalProperties": {
+          "$ref": "#/components/schemas/Link"
+        }
+      },
+      "RepresentationModelObject": {
+        "type": "object",
+        "properties": {
+          "_links": {
+            "$ref": "#/components/schemas/Links"
+          }
+        }
+      },
+      "EntityModelFile": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "contentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "contentLength": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "contentMimeType": {
+            "type": "string"
+          },
+          "parent": {
+            "$ref": "#/components/schemas/Folder"
+          },
+          "_links": {
+            "$ref": "#/components/schemas/Links"
+          }
+        }
+      },
+      "File": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "contentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "contentLength": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "contentMimeType": {
+            "type": "string"
+          },
+          "parent": {
+            "$ref": "#/components/schemas/Folder"
+          }
+        }
+      },
+      "Folder": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "parent": {
+            "$ref": "#/components/schemas/Folder"
+          },
+          "childs": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Folder"
+            }
+          },
+          "files": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/File"
+            }
+          }
+        }
+      },
+      "PageMetadata": {
+        "type": "object",
+        "properties": {
+          "size": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "PagedModelEntityModelFile": {
+        "type": "object",
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "files": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EntityModelFile"
+                }
+              }
+            }
+          },
+          "_links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageMetadata"
+          }
+        }
+      },
+      "EntityModelFolder": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "parent": {
+            "$ref": "#/components/schemas/Folder"
+          },
+          "childs": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Folder"
+            }
+          },
+          "files": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/File"
+            }
+          },
+          "_links": {
+            "$ref": "#/components/schemas/Links"
+          }
+        }
+      },
+      "CollectionModelObject": {
+        "type": "object",
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "objects": {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "_links": {
+            "$ref": "#/components/schemas/Links"
+          }
+        }
+      },
+      "CollectionModelEntityModelFile": {
+        "type": "object",
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "files": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EntityModelFile"
+                }
+              }
+            }
+          },
+          "_links": {
+            "$ref": "#/components/schemas/Links"
+          }
+        }
+      },
+      "PagedModelEntityModelFolder": {
+        "type": "object",
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "folders": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EntityModelFolder"
+                }
+              }
+            }
+          },
+          "_links": {
+            "$ref": "#/components/schemas/Links"
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageMetadata"
+          }
+        }
+      },
+      "CollectionModelFolder": {
+        "type": "object",
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "folders": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/FolderResponse"
+                }
+              }
+            }
+          },
+          "_links": {
+            "$ref": "#/components/schemas/Links"
+          }
+        }
+      },
+      "CollectionModelFile": {
+        "type": "object",
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "files": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/FileResponse"
+                }
+              }
+            }
+          },
+          "_links": {
+            "$ref": "#/components/schemas/Links"
+          }
+        }
+      },
+      "CollectionModelEntityModelFolder": {
+        "type": "object",
+        "properties": {
+          "_embedded": {
+            "type": "object",
+            "properties": {
+              "folders": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EntityModelFolder"
+                }
+              }
+            }
+          },
+          "_links": {
+            "$ref": "#/components/schemas/Links"
+          }
+        }
+      },
+      "FileRequestBody": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "contentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "contentLength": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "contentMimeType": {
+            "type": "string"
+          },
+          "parent": {
+            "type": "string"
+          }
+        }
+      },
+      "FolderRequestBody": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "parent": {
+            "type": "string"
+          },
+          "childs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "FileResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "contentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "contentLength": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "contentMimeType": {
+            "type": "string"
+          },
+          "parent": {
+            "$ref": "#/components/schemas/Folder"
+          }
+        }
+      },
+      "FolderResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "parent": {
+            "$ref": "#/components/schemas/Folder"
+          },
+          "childs": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Folder"
+            }
+          },
+          "files": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/File"
+            }
+          }
+        }
+      },
+      "Link": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string"
+          },
+          "hreflang": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "deprecation": {
+            "type": "string"
+          },
+          "profile": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "templated": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  }
+}

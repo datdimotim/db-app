@@ -9,7 +9,7 @@
     "lint": "eslint --ext .js,.ts,.vue ./",
     "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
     "test": "echo \"No test specified\" && exit 0",
-    "openapi": "openapi --input ./openapi-spec/spring-content-app.json --output ./src/clients --client axios"
+    "openapi": "openapi --input ./openapi-spec/spring-content-app.json --output ./src/clients/generated --client axios"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",

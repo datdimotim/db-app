@@ -23,7 +23,7 @@ export class FolderPropertyReferenceControllerService {
     ): CancelablePromise<CollectionModelFolder> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/folders/{id}/childs',
+            url: '/api/folders/{id}/childs',
             path: {
                 'id': id,
             },
@@ -46,7 +46,7 @@ export class FolderPropertyReferenceControllerService {
     ): CancelablePromise<CollectionModelFolder> {
         return __request(OpenAPI, {
             method: 'PUT',
-            url: '/folders/{id}/childs',
+            url: '/api/folders/{id}/childs',
             path: {
                 'id': id,
             },
@@ -66,7 +66,7 @@ export class FolderPropertyReferenceControllerService {
     ): CancelablePromise<void> {
         return __request(OpenAPI, {
             method: 'DELETE',
-            url: '/folders/{id}/childs',
+            url: '/api/folders/{id}/childs',
             path: {
                 'id': id,
             },
@@ -89,7 +89,7 @@ export class FolderPropertyReferenceControllerService {
     ): CancelablePromise<CollectionModelFolder> {
         return __request(OpenAPI, {
             method: 'PATCH',
-            url: '/folders/{id}/childs',
+            url: '/api/folders/{id}/childs',
             path: {
                 'id': id,
             },
@@ -111,7 +111,7 @@ export class FolderPropertyReferenceControllerService {
     ): CancelablePromise<CollectionModelFolder> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/folders/{id}/childs/{propertyId}',
+            url: '/api/folders/{id}/childs/{propertyId}',
             path: {
                 'id': id,
                 'propertyId': propertyId,
@@ -135,7 +135,7 @@ export class FolderPropertyReferenceControllerService {
     ): CancelablePromise<void> {
         return __request(OpenAPI, {
             method: 'DELETE',
-            url: '/folders/{id}/childs/{propertyId}',
+            url: '/api/folders/{id}/childs/{propertyId}',
             path: {
                 'id': id,
                 'propertyId': propertyId,
@@ -157,7 +157,7 @@ export class FolderPropertyReferenceControllerService {
     ): CancelablePromise<CollectionModelFile> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/folders/{id}/files',
+            url: '/api/folders/{id}/files',
             path: {
                 'id': id,
             },
@@ -180,7 +180,7 @@ export class FolderPropertyReferenceControllerService {
     ): CancelablePromise<CollectionModelFile> {
         return __request(OpenAPI, {
             method: 'PUT',
-            url: '/folders/{id}/files',
+            url: '/api/folders/{id}/files',
             path: {
                 'id': id,
             },
@@ -200,7 +200,7 @@ export class FolderPropertyReferenceControllerService {
     ): CancelablePromise<void> {
         return __request(OpenAPI, {
             method: 'DELETE',
-            url: '/folders/{id}/files',
+            url: '/api/folders/{id}/files',
             path: {
                 'id': id,
             },
@@ -223,7 +223,7 @@ export class FolderPropertyReferenceControllerService {
     ): CancelablePromise<CollectionModelFile> {
         return __request(OpenAPI, {
             method: 'PATCH',
-            url: '/folders/{id}/files',
+            url: '/api/folders/{id}/files',
             path: {
                 'id': id,
             },
@@ -245,7 +245,7 @@ export class FolderPropertyReferenceControllerService {
     ): CancelablePromise<CollectionModelFile> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/folders/{id}/files/{propertyId}',
+            url: '/api/folders/{id}/files/{propertyId}',
             path: {
                 'id': id,
                 'propertyId': propertyId,
@@ -269,7 +269,7 @@ export class FolderPropertyReferenceControllerService {
     ): CancelablePromise<void> {
         return __request(OpenAPI, {
             method: 'DELETE',
-            url: '/folders/{id}/files/{propertyId}',
+            url: '/api/folders/{id}/files/{propertyId}',
             path: {
                 'id': id,
                 'propertyId': propertyId,
@@ -291,7 +291,7 @@ export class FolderPropertyReferenceControllerService {
     ): CancelablePromise<EntityModelFolder> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/folders/{id}/parent',
+            url: '/api/folders/{id}/parent',
             path: {
                 'id': id,
             },
@@ -314,7 +314,7 @@ export class FolderPropertyReferenceControllerService {
     ): CancelablePromise<EntityModelFolder> {
         return __request(OpenAPI, {
             method: 'PUT',
-            url: '/folders/{id}/parent',
+            url: '/api/folders/{id}/parent',
             path: {
                 'id': id,
             },
@@ -334,7 +334,7 @@ export class FolderPropertyReferenceControllerService {
     ): CancelablePromise<void> {
         return __request(OpenAPI, {
             method: 'DELETE',
-            url: '/folders/{id}/parent',
+            url: '/api/folders/{id}/parent',
             path: {
                 'id': id,
             },
@@ -357,7 +357,7 @@ export class FolderPropertyReferenceControllerService {
     ): CancelablePromise<EntityModelFolder> {
         return __request(OpenAPI, {
             method: 'PATCH',
-            url: '/folders/{id}/parent',
+            url: '/api/folders/{id}/parent',
             path: {
                 'id': id,
             },
@@ -379,7 +379,7 @@ export class FolderPropertyReferenceControllerService {
     ): CancelablePromise<EntityModelFolder> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/folders/{id}/parent/{propertyId}',
+            url: '/api/folders/{id}/parent/{propertyId}',
             path: {
                 'id': id,
                 'propertyId': propertyId,
@@ -403,7 +403,7 @@ export class FolderPropertyReferenceControllerService {
     ): CancelablePromise<void> {
         return __request(OpenAPI, {
             method: 'DELETE',
-            url: '/folders/{id}/parent/{propertyId}',
+            url: '/api/folders/{id}/parent/{propertyId}',
             path: {
                 'id': id,
                 'propertyId': propertyId,

@@ -19,7 +19,7 @@ export class FileSearchControllerService {
     ): CancelablePromise<CollectionModelEntityModelFile> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/files/search/findAllByNameLike',
+            url: '/api/files/search/findAllByNameLike',
             query: {
                 'name': name,
             },

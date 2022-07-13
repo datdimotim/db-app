@@ -1,44 +1,174 @@
 <template>
-  <q-page class="row items-center justify-evenly">
-    <folder-view></folder-view>
+  <q-page class="">
+    <q-card>
+      <q-card-actions class="q-gutter-md">
+        <q-btn
+          v-if="folderId"
+          label="parent"
+          @click="goToParent"
+        />
+        <div style="font-size: 16pt">Folder: {{ folder.name }}</div>
+      </q-card-actions>
+      <q-card-section class="q-gutter-md">
+        <q-table
+          title="Files"
+          :rows="fileList"
+          :columns="columns"
+          row-key="id"
+        >
+          <template v-slot:body-cell-name="props">
+            <q-td :props="props">
+              <q-badge :label="props.value"></q-badge>
+            </q-td>
+          </template>
+        </q-table>
+        <q-table
+          title="Folders"
+          :rows="folderList"
+          :columns="columns"
+          row-key="id"
+        >
+          <template v-slot:body-cell-name="props">
+            <q-td :props="props">
+              <q-badge
+                :label="props.value"
+                @click="openFolder(props.row)"
+              />
+            </q-td>
+          </template>
+        </q-table>
+      </q-card-section>
+      <q-card-actions class="q-mr-sm">
+        <q-space/>
+        <q-btn
+          label="New folder"
+          @click="newFolder"
+        />
+        <q-btn
+          label="New file"
+          @click="newFolder"
+        />
+      </q-card-actions>
+    </q-card>
   </q-page>
 </template>
 
 <script lang="ts">
-import { Todo, Meta } from 'components/models';
-import { defineComponent, ref } from 'vue';
-import FolderView from 'components/FolderView.vue';
+import {defineComponent, ref, toRef} from 'vue';
+import {
+  ApiError,
+  CollectionModelFile,
+  CollectionModelFolder,
+  EntityModelFile, EntityModelFolder,
+  FileEntityControllerService, FileResponse,
+  FolderEntityControllerService, FolderResponse
+} from 'src/clients/generated';
+import { useQuasar } from 'quasar';
+import { useRouter } from 'vue-router';
+import followLink from 'src/clients/hateoas-link-follower';
 
 export default defineComponent({
   name: 'IndexPage',
-  components: {FolderView },
-  setup() {
-    const todos = ref<Todo[]>([
+  components: {},
+  props: {
+    folderId: {
+      required: false,
+      type: String,
+      default: () => null
+    },
+  },
+  setup(props) {
+    const $q = useQuasar()
+    const router = useRouter()
+    const fileList = ref<FileResponse[]>([])
+    const folderList = ref<FolderResponse[]>([])
+    const folder = ref<EntityModelFolder>({})
+    const folderId = toRef(props, 'folderId');
+    const columns = ref([
       {
-        id: 1,
-        content: 'ct1'
+        name: 'name',
+        required: true,
+        label: 'name',
+        align: 'left',
+        field: (row: EntityModelFile | EntityModelFolder) => row.name,
+        format: (val: string) => `${val}`,
+        sortable: true
       },
-      {
-        id: 2,
-        content: 'ct2'
-      },
-      {
-        id: 3,
-        content: 'ct3'
-      },
-      {
-        id: 4,
-        content: 'ct4'
-      },
-      {
-        id: 5,
-        content: 'ct5'
+    ])
+    function newFolder() {
+      $q.dialog({
+        title: 'New folder',
+        message: 'folder name:',
+        prompt: {
+          model: '',
+          type: 'text' // optional
+        },
+        cancel: true,
+        persistent: true
+      }).onOk(data => {
+        createFolder(data)
+      })
+    }
+    async function createFolder(name: string) {
+      await FolderEntityControllerService.postCollectionResourceFolderPost({
+        name,
+        parent: folder.value._links?.self.href
+      })
+      await refetch();
+    }
+    async function refetch() {
+      if (!folderId.value) {
+        folder.value.name = '/'
+        const childFiles = await FileEntityControllerService.getCollectionResourceFileGet1();
+        fileList.value = childFiles._embedded?.files || []
+        const childFolders = await FolderEntityControllerService.getCollectionResourceFolderGet1();
+        folderList.value = childFolders._embedded?.folders || []
+      } else {
+        folder.value = await FolderEntityControllerService.getItemResourceFolderGet(folderId.value)
+
+        const childFolders = await followLink<CollectionModelFolder>(folder.value._links?.childs.href || '');
+        folderList.value = childFolders._embedded?.folders || [];
+
+        const childFiles = await followLink<CollectionModelFile>(folder.value._links?.files.href || '');
+        fileList.value = childFiles._embedded?.files || [];
       }
-    ]);
-    const meta = ref<Meta>({
-      totalCount: 1200
-    });
-    return { todos, meta };
+
+    }
+    function openFolder(folder: EntityModelFolder) {
+      router.push({name: 'folderWithId', params: {folderId: folder.id}})
+    }
+    async function goToParent() {
+      const parent = await followLink<EntityModelFolder>(folder.value._links?.parent.href || '')
+        .catch((e: ApiError) => {
+          if (e.status === 404) {
+            return null;
+          }
+          throw e;
+        })
+      if (parent) {
+        router.push({name: 'folderWithId', params: {folderId: parent.id}})
+      } else {
+        router.push({name: 'rootFolder'})
+      }
+    }
+    return {
+      fileList,
+      folderList,
+      folder,
+      columns,
+      refetch,
+      openFolder,
+      goToParent,
+      newFolder
+    };
+  },
+  watch: {
+    folderId: {
+      handler: async function () {
+        await this.refetch()
+      },
+      immediate: true
+    }
   }
 });
 </script>

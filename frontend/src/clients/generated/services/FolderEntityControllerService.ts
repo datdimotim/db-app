@@ -1,32 +1,32 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { EntityModelFile } from '../models/EntityModelFile';
-import type { FileRequestBody } from '../models/FileRequestBody';
-import type { PagedModelEntityModelFile } from '../models/PagedModelEntityModelFile';
+import type { EntityModelFolder } from '../models/EntityModelFolder';
+import type { FolderRequestBody } from '../models/FolderRequestBody';
+import type { PagedModelEntityModelFolder } from '../models/PagedModelEntityModelFolder';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
 
-export class FileEntityControllerService {
+export class FolderEntityControllerService {
 
     /**
-     * get-file
+     * get-folder
      * @param page Zero-based page index (0..N)
      * @param size The size of the page to be returned
      * @param sort Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.
-     * @returns PagedModelEntityModelFile OK
+     * @returns PagedModelEntityModelFolder OK
      * @throws ApiError
      */
-    public static getCollectionResourceFileGet1(
+    public static getCollectionResourceFolderGet1(
         page?: number,
         size: number = 20,
         sort?: Array<string>,
-    ): CancelablePromise<PagedModelEntityModelFile> {
+    ): CancelablePromise<PagedModelEntityModelFolder> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/files',
+            url: '/api/folders',
             query: {
                 'page': page,
                 'size': size,
@@ -36,34 +36,34 @@ export class FileEntityControllerService {
     }
 
     /**
-     * create-file
+     * create-folder
      * @param requestBody
-     * @returns EntityModelFile Created
+     * @returns EntityModelFolder Created
      * @throws ApiError
      */
-    public static postCollectionResourceFilePost(
-        requestBody: FileRequestBody,
-    ): CancelablePromise<EntityModelFile> {
+    public static postCollectionResourceFolderPost(
+        requestBody: FolderRequestBody,
+    ): CancelablePromise<EntityModelFolder> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/files',
+            url: '/api/folders',
             body: requestBody,
             mediaType: 'application/json',
         });
     }
 
     /**
-     * get-file
+     * get-folder
      * @param id
-     * @returns EntityModelFile OK
+     * @returns EntityModelFolder OK
      * @throws ApiError
      */
-    public static getItemResourceFileGet(
+    public static getItemResourceFolderGet(
         id: string,
-    ): CancelablePromise<EntityModelFile> {
+    ): CancelablePromise<EntityModelFolder> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/files/{id}',
+            url: '/api/folders/{id}',
             path: {
                 'id': id,
             },
@@ -74,19 +74,19 @@ export class FileEntityControllerService {
     }
 
     /**
-     * update-file
+     * update-folder
      * @param id
      * @param requestBody
-     * @returns EntityModelFile OK
+     * @returns EntityModelFolder OK
      * @throws ApiError
      */
-    public static putItemResourceFilePut(
+    public static putItemResourceFolderPut(
         id: string,
-        requestBody: FileRequestBody,
-    ): CancelablePromise<EntityModelFile> {
+        requestBody: FolderRequestBody,
+    ): CancelablePromise<EntityModelFolder> {
         return __request(OpenAPI, {
             method: 'PUT',
-            url: '/files/{id}',
+            url: '/api/folders/{id}',
             path: {
                 'id': id,
             },
@@ -96,17 +96,17 @@ export class FileEntityControllerService {
     }
 
     /**
-     * delete-file
+     * delete-folder
      * @param id
      * @returns void
      * @throws ApiError
      */
-    public static deleteItemResourceFileDelete(
+    public static deleteItemResourceFolderDelete(
         id: string,
     ): CancelablePromise<void> {
         return __request(OpenAPI, {
             method: 'DELETE',
-            url: '/files/{id}',
+            url: '/api/folders/{id}',
             path: {
                 'id': id,
             },
@@ -117,19 +117,19 @@ export class FileEntityControllerService {
     }
 
     /**
-     * patch-file
+     * patch-folder
      * @param id
      * @param requestBody
-     * @returns EntityModelFile OK
+     * @returns EntityModelFolder OK
      * @throws ApiError
      */
-    public static patchItemResourceFilePatch(
+    public static patchItemResourceFolderPatch(
         id: string,
-        requestBody: FileRequestBody,
-    ): CancelablePromise<EntityModelFile> {
+        requestBody: FolderRequestBody,
+    ): CancelablePromise<EntityModelFolder> {
         return __request(OpenAPI, {
             method: 'PATCH',
-            url: '/files/{id}',
+            url: '/api/folders/{id}',
             path: {
                 'id': id,
             },

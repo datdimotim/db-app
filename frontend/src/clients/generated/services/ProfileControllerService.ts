@@ -16,7 +16,7 @@ export class ProfileControllerService {
     public static listAllFormsOfMetadata1(): CancelablePromise<RepresentationModelObject> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/profile',
+            url: '/api/profile',
         });
     }
 
@@ -27,7 +27,7 @@ export class ProfileControllerService {
     public static descriptor111(): CancelablePromise<string> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/profile/files',
+            url: '/api/profile/files',
         });
     }
 
@@ -38,7 +38,7 @@ export class ProfileControllerService {
     public static descriptor112(): CancelablePromise<string> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/profile/folders',
+            url: '/api/profile/folders',
         });
     }
 

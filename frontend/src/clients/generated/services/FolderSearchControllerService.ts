@@ -19,7 +19,7 @@ export class FolderSearchControllerService {
     ): CancelablePromise<CollectionModelEntityModelFolder> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/folders/search/findAllByNameLike',
+            url: '/api/folders/search/findAllByNameLike',
             query: {
                 'name': name,
             },

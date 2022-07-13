@@ -21,7 +21,7 @@ export class FilePropertyReferenceControllerService {
     ): CancelablePromise<EntityModelFolder> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/files/{id}/parent',
+            url: '/api/files/{id}/parent',
             path: {
                 'id': id,
             },
@@ -44,7 +44,7 @@ export class FilePropertyReferenceControllerService {
     ): CancelablePromise<EntityModelFolder> {
         return __request(OpenAPI, {
             method: 'PUT',
-            url: '/files/{id}/parent',
+            url: '/api/files/{id}/parent',
             path: {
                 'id': id,
             },
@@ -64,7 +64,7 @@ export class FilePropertyReferenceControllerService {
     ): CancelablePromise<void> {
         return __request(OpenAPI, {
             method: 'DELETE',
-            url: '/files/{id}/parent',
+            url: '/api/files/{id}/parent',
             path: {
                 'id': id,
             },
@@ -87,7 +87,7 @@ export class FilePropertyReferenceControllerService {
     ): CancelablePromise<EntityModelFolder> {
         return __request(OpenAPI, {
             method: 'PATCH',
-            url: '/files/{id}/parent',
+            url: '/api/files/{id}/parent',
             path: {
                 'id': id,
             },
@@ -109,7 +109,7 @@ export class FilePropertyReferenceControllerService {
     ): CancelablePromise<EntityModelFolder> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/files/{id}/parent/{propertyId}',
+            url: '/api/files/{id}/parent/{propertyId}',
             path: {
                 'id': id,
                 'propertyId': propertyId,
@@ -133,7 +133,7 @@ export class FilePropertyReferenceControllerService {
     ): CancelablePromise<void> {
         return __request(OpenAPI, {
             method: 'DELETE',
-            url: '/files/{id}/parent/{propertyId}',
+            url: '/api/files/{id}/parent/{propertyId}',
             path: {
                 'id': id,
                 'propertyId': propertyId,
