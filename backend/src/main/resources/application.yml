@@ -10,6 +10,9 @@ server:
   #  enabled: true
 
 spring:
+  data:
+    rest:
+      base-path: api
   servlet:
     multipart:
       max-file-size: 100GB
