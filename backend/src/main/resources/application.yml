@@ -10,6 +10,9 @@ server:
   #  enabled: true
 
 spring:
+  content:
+    rest:
+      base-uri: api
   data:
     rest:
       base-path: api
