@@ -7,6 +7,7 @@ const routes: RouteRecordRaw[] = [
     children: [
       { name: 'rootFolder', path: '', component: () => import('pages/IndexPage.vue') },
       { name: 'folderWithId', path: ':folderId', component: () => import('pages/IndexPage.vue'), props: true },
+      { name: 'mediaPlayer', path: 'media/player/:fileId', component: () => import('pages/Player.vue'), props: true },
     ],
   },
 

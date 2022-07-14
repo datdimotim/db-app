@@ -18,7 +18,10 @@
         >
           <template v-slot:body-cell-name="props">
             <q-td :props="props">
-              <q-badge :label="props.value"></q-badge>
+              <q-badge
+                :label="props.value"
+                @click="openFile(props.row)">
+              </q-badge>
             </q-td>
           </template>
         </q-table>
@@ -53,7 +56,7 @@
     <q-dialog v-model="showUploadDialog" persistent>
       <q-card>
         <q-card-section>
-          <div class="text-h6">Your address</div>
+          <div class="text-h6">Select file</div>
         </q-card-section>
 
         <q-card-section>
@@ -185,6 +188,9 @@ export default defineComponent({
     function openFolder(folder: EntityModelFolder) {
       router.push({name: 'folderWithId', params: {folderId: folder.id}})
     }
+    function openFile(file: EntityModelFile) {
+      router.push({name: 'mediaPlayer', params: {fileId: file.id}})
+    }
     async function goToParent() {
       const parent = await followLink<EntityModelFolder>(folder.value._links?.parent.href || '')
         .catch((e: ApiError) => {
@@ -211,7 +217,8 @@ export default defineComponent({
       showUploadDialog,
       fileUpload,
       newFile,
-      uploadFile
+      uploadFile,
+      openFile
     };
   },
   watch: {
