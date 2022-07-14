@@ -46,10 +46,26 @@
         />
         <q-btn
           label="New file"
-          @click="newFolder"
+          @click="newFile"
         />
       </q-card-actions>
     </q-card>
+    <q-dialog v-model="showUploadDialog" persistent>
+      <q-card>
+        <q-card-section>
+          <div class="text-h6">Your address</div>
+        </q-card-section>
+
+        <q-card-section>
+          <q-file v-model="fileUpload" label="Select file"></q-file>
+        </q-card-section>
+
+        <q-card-actions align="right">
+          <q-btn label="Cancel" v-close-popup></q-btn>
+          <q-btn label="Ok" @click="uploadFile" :disable="!fileUpload"></q-btn>
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
   </q-page>
 </template>
 
@@ -66,6 +82,7 @@ import {
 import { useQuasar } from 'quasar';
 import { useRouter } from 'vue-router';
 import followLink from 'src/clients/hateoas-link-follower';
+import uploadFileContent from 'src/clients/file-uploader';
 
 export default defineComponent({
   name: 'IndexPage',
@@ -80,6 +97,8 @@ export default defineComponent({
   setup(props) {
     const $q = useQuasar()
     const router = useRouter()
+    const showUploadDialog = ref(false);
+    const fileUpload = ref<File | null>(null);
     const fileList = ref<FileResponse[]>([])
     const folderList = ref<FolderResponse[]>([])
     const folder = ref<EntityModelFolder>({})
@@ -108,6 +127,35 @@ export default defineComponent({
       }).onOk(data => {
         createFolder(data)
       })
+    }
+    function newFile() {
+      fileUpload.value = null;
+      showUploadDialog.value = true;
+    }
+    async function uploadFile() {
+      const file = fileUpload.value;
+
+      if (!file) {
+        throw new Error('file is null')
+      }
+
+      const response = await FileEntityControllerService.postCollectionResourceFilePost({
+        name: file.name,
+        contentMimeType: file.type,
+        parent: folder.value?._links?.self.href || undefined
+      })
+
+      const contentLink = response._links?.content.href;
+      if (!contentLink) {
+        throw new Error('content link is null')
+      }
+
+      await uploadFileContent(contentLink, file);
+
+      await refetch();
+
+      fileUpload.value = null;
+      showUploadDialog.value = false;
     }
     async function createFolder(name: string) {
       await FolderEntityControllerService.postCollectionResourceFolderPost({
@@ -159,7 +207,11 @@ export default defineComponent({
       refetch,
       openFolder,
       goToParent,
-      newFolder
+      newFolder,
+      showUploadDialog,
+      fileUpload,
+      newFile,
+      uploadFile
     };
   },
   watch: {
