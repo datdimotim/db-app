@@ -2,7 +2,7 @@ import { RouteRecordRaw } from 'vue-router';
 
 const routes: RouteRecordRaw[] = [
   {
-    path: '/folder',
+    path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { name: 'rootFolder', path: '', component: () => import('pages/IndexPage.vue') },

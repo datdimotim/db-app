@@ -2,14 +2,22 @@
   <q-page class="">
     <q-card>
       <q-card-actions class="q-gutter-md">
-        <q-btn
-          v-if="folderId"
-          label="parent"
-          @click="goToParent"
-        />
-        <div style="font-size: 16pt">Folder: {{ folder.name }}</div>
+        <router-link
+          v-if="folderId && parentFolder"
+          :to="parentFolder.id"
+        >
+          Parent: {{parentFolder.name}}
+        </router-link>
+        <router-link
+          v-if="folderId && !parentFolder"
+          to="../"
+        >
+          Parent: /
+        </router-link>
       </q-card-actions>
       <q-card-section class="q-gutter-md">
+        <div style="font-size: 16pt" v-if="folder">Folder: {{ folder.name }}</div>
+        <div style="font-size: 16pt" v-if="!folder">Folder: /</div>
         <q-table
           title="Files"
           :rows="fileList"
@@ -18,10 +26,7 @@
         >
           <template v-slot:body-cell-name="props">
             <q-td :props="props">
-              <q-badge
-                :label="props.value"
-                @click="openFile(props.row)">
-              </q-badge>
+              <router-link :to="`media/player/${props.row.id}`">{{props.value}}</router-link>
             </q-td>
           </template>
         </q-table>
@@ -33,10 +38,7 @@
         >
           <template v-slot:body-cell-name="props">
             <q-td :props="props">
-              <q-badge
-                :label="props.value"
-                @click="openFolder(props.row)"
-              />
+              <router-link :to="props.row.id">{{props.value}}</router-link>
             </q-td>
           </template>
         </q-table>
@@ -79,8 +81,8 @@ import {
   CollectionModelFile,
   CollectionModelFolder,
   EntityModelFile, EntityModelFolder,
-  FileEntityControllerService, FileResponse,
-  FolderEntityControllerService, FolderResponse
+  FileEntityControllerService, FileResponse, FileSearchControllerService,
+  FolderEntityControllerService, FolderResponse, FolderSearchControllerService
 } from 'src/clients/generated';
 import { useQuasar } from 'quasar';
 import { useRouter } from 'vue-router';
@@ -104,7 +106,8 @@ export default defineComponent({
     const fileUpload = ref<File | null>(null);
     const fileList = ref<FileResponse[]>([])
     const folderList = ref<FolderResponse[]>([])
-    const folder = ref<EntityModelFolder>({})
+    const parentFolder = ref<EntityModelFolder | null>(null)
+    const folder = ref<EntityModelFolder | null>(null)
     const folderId = toRef(props, 'folderId');
     const columns = ref([
       {
@@ -163,20 +166,31 @@ export default defineComponent({
     async function createFolder(name: string) {
       await FolderEntityControllerService.postCollectionResourceFolderPost({
         name,
-        parent: folder.value._links?.self.href
+        parent: folder.value?._links?.self.href
       })
       await refetch();
     }
     async function refetch() {
       if (!folderId.value) {
-        folder.value.name = '/'
-        const childFiles = await FileEntityControllerService.getCollectionResourceFileGet1();
+        folder.value = null;
+        parentFolder.value = null;
+        const childFiles = await FileSearchControllerService.executeSearchFileGet()
         fileList.value = childFiles._embedded?.files || []
-        const childFolders = await FolderEntityControllerService.getCollectionResourceFolderGet1();
+        const childFolders = await FolderSearchControllerService.executeSearchFolderGet();
         folderList.value = childFolders._embedded?.folders || []
       } else {
         folder.value = await FolderEntityControllerService.getItemResourceFolderGet(folderId.value)
-
+        const parentUrl = folder.value._links?.parent.href;
+        if (!parentUrl) {
+          throw new Error('parent url is null');
+        }
+        parentFolder.value = await followLink<EntityModelFolder>(parentUrl)
+          .catch((e: ApiError) => {
+            if (e.status === 404) {
+              return null;
+            }
+            throw e;
+          })
         const childFolders = await followLink<CollectionModelFolder>(folder.value._links?.childs.href || '');
         folderList.value = childFolders._embedded?.folders || [];
 
@@ -185,22 +199,9 @@ export default defineComponent({
       }
 
     }
-    function openFolder(folder: EntityModelFolder) {
-      router.push({name: 'folderWithId', params: {folderId: folder.id}})
-    }
-    function openFile(file: EntityModelFile) {
-      router.push({name: 'mediaPlayer', params: {fileId: file.id}})
-    }
     async function goToParent() {
-      const parent = await followLink<EntityModelFolder>(folder.value._links?.parent.href || '')
-        .catch((e: ApiError) => {
-          if (e.status === 404) {
-            return null;
-          }
-          throw e;
-        })
-      if (parent) {
-        router.push({name: 'folderWithId', params: {folderId: parent.id}})
+      if (parentFolder.value) {
+        router.push({name: 'folderWithId', params: {folderId: parentFolder.value.id}})
       } else {
         router.push({name: 'rootFolder'})
       }
@@ -211,14 +212,13 @@ export default defineComponent({
       folder,
       columns,
       refetch,
-      openFolder,
       goToParent,
       newFolder,
       showUploadDialog,
       fileUpload,
       newFile,
       uploadFile,
-      openFile
+      parentFolder
     };
   },
   watch: {
