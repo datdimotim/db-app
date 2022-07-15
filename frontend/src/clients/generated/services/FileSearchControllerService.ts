@@ -10,19 +10,13 @@ import { request as __request } from '../core/request';
 export class FileSearchControllerService {
 
     /**
-     * @param name
      * @returns CollectionModelEntityModelFile OK
      * @throws ApiError
      */
-    public static executeSearchFileGet(
-        name?: string,
-    ): CancelablePromise<CollectionModelEntityModelFile> {
+    public static executeSearchFileGet(): CancelablePromise<CollectionModelEntityModelFile> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/api/files/search/findAllByNameLike',
-            query: {
-                'name': name,
-            },
+            url: '/api/files/search/findAllByParentIdIsNull',
             errors: {
                 404: `Not Found`,
             },

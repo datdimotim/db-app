@@ -10,19 +10,13 @@ import { request as __request } from '../core/request';
 export class FolderSearchControllerService {
 
     /**
-     * @param name
      * @returns CollectionModelEntityModelFolder OK
      * @throws ApiError
      */
-    public static executeSearchFolderGet(
-        name?: string,
-    ): CancelablePromise<CollectionModelEntityModelFolder> {
+    public static executeSearchFolderGet(): CancelablePromise<CollectionModelEntityModelFolder> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/api/folders/search/findAllByNameLike',
-            query: {
-                'name': name,
-            },
+            url: '/api/folders/search/findAllByParentIdIsNull',
             errors: {
                 404: `Not Found`,
             },

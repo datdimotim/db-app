@@ -14,7 +14,6 @@ import com.jayway.restassured.RestAssured;
 import java.io.ByteArrayInputStream;
 import java.util.Optional;
 import java.util.UUID;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpStatus;
 import org.hamcrest.Matchers;

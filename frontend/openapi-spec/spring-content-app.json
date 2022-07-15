@@ -107,21 +107,12 @@
         }
       }
     },
-    "/api/files/search/findAllByNameLike": {
+    "/api/files/search/findAllByParentIdIsNull": {
       "get": {
         "tags": [
           "file-search-controller"
         ],
         "operationId": "executeSearch-file-get",
-        "parameters": [
-          {
-            "name": "name",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -641,21 +632,12 @@
         }
       }
     },
-    "/api/folders/search/findAllByNameLike": {
+    "/api/folders/search/findAllByParentIdIsNull": {
       "get": {
         "tags": [
           "folder-search-controller"
         ],
         "operationId": "executeSearch-folder-get",
-        "parameters": [
-          {
-            "name": "name",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -1748,42 +1730,6 @@
           }
         }
       },
-      "EntityModelFile": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "name": {
-            "type": "string"
-          },
-          "created": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "summary": {
-            "type": "string"
-          },
-          "contentId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "contentLength": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "contentMimeType": {
-            "type": "string"
-          },
-          "parent": {
-            "$ref": "#/components/schemas/Folder"
-          },
-          "_links": {
-            "$ref": "#/components/schemas/Links"
-          }
-        }
-      },
       "File": {
         "type": "object",
         "properties": {
@@ -1850,6 +1796,42 @@
             "items": {
               "$ref": "#/components/schemas/File"
             }
+          }
+        }
+      },
+      "EntityModelFile": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "contentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "contentLength": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "contentMimeType": {
+            "type": "string"
+          },
+          "parent": {
+            "$ref": "#/components/schemas/Folder"
+          },
+          "_links": {
+            "$ref": "#/components/schemas/Links"
           }
         }
       },
