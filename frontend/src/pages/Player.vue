@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-sm grow-container grow q-gutter-sm">
+  <div class="fullscreen-div q-pa-sm">
     <VideoPlayer v-if="isReady" :options="videoOptions"/>
   </div>
 </template>
@@ -76,5 +76,13 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
+.fullscreen-div {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin-top: 0;
+  margin-left: 0;
+}
 </style>

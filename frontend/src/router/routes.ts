@@ -1,13 +1,18 @@
-import { RouteRecordRaw } from 'vue-router';
+import {RouteRecordRaw} from 'vue-router';
 
 const routes: RouteRecordRaw[] = [
+  {
+    path: '/media/player/:fileId',
+    name: 'mediaPlayer',
+    component: () => import('pages/Player.vue'),
+    props: true
+  },
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { name: 'rootFolder', path: '', component: () => import('pages/IndexPage.vue') },
-      { name: 'folderWithId', path: ':folderId', component: () => import('pages/IndexPage.vue'), props: true },
-      { name: 'mediaPlayer', path: 'media/player/:fileId', component: () => import('pages/Player.vue'), props: true },
+      {name: 'rootFolder', path: '', component: () => import('pages/IndexPage.vue')},
+      {name: 'folderWithId', path: ':folderId', component: () => import('pages/IndexPage.vue'), props: true},
     ],
   },
 
