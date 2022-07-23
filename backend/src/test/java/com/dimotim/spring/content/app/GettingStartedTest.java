@@ -67,7 +67,7 @@ public class GettingStartedTest extends BaseTest {
                                                                             .getBytes()),
                                                             "text/plain")
                                                     .when()
-                                                    .put("/files/" + fid + "/content")
+                                                    .put("/api/files/" + fid + "/content")
                                                     .then()
                                                     .statusCode(HttpStatus.SC_CREATED);
 
@@ -98,7 +98,7 @@ public class GettingStartedTest extends BaseTest {
                                                         given().header("accept", "text/plain")
                                                                 .when()
                                                                 .get(
-                                                                        "files/"
+                                                                        "api/files/"
                                                                                 + file.getId()
                                                                                 + "/content")
                                                                 .then()
