@@ -13,11 +13,6 @@ import {
 import VideoPlayer from 'components/VideoPlayer.vue';
 import {VideoJsPlayerOptions} from 'video.js';
 
-interface Sources {
-  src: string,
-  type?: string
-}
-
 export default defineComponent({
   name: 'media-player',
   components: {VideoPlayer},
