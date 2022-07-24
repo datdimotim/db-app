@@ -11,6 +11,7 @@ import {
   FileEntityControllerService
 } from 'src/clients/generated';
 import VideoPlayer from 'components/VideoPlayer.vue';
+import {VideoJsPlayerOptions} from 'video.js';
 
 interface Sources {
   src: string,
@@ -31,15 +32,16 @@ export default defineComponent({
     const isReady = ref(false);
     const file = ref<EntityModelFile>({})
     const fileId = toRef(props, 'fileId');
-    const videoOptions = ref({
-      autoplay: true,
+    const videoOptions = ref<VideoJsPlayerOptions>({
+      autoplay: false,
       controls: true,
+      muted: true,
       sources: [
         {
           src: 'http://vjs.zencdn.net/v/oceans.mp4',
           type: 'video/mp4'
         }
-      ] as Sources[]
+      ]
     });
 
     async function refetch() {
