@@ -1,6 +1,6 @@
 
 application:
-  max-range-size-kb: 2048
+  max-range-size-kb: 1024
 
 server:
   port: 8080
