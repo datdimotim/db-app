@@ -3,7 +3,7 @@ WORKDIR /build
 COPY ./backend /build
 CMD mvn clean package
 
-FROM node:15 as build-frontend
+FROM node:16 as build-frontend
 WORKDIR /build
 COPY ./frontend /build
 RUN npm install
