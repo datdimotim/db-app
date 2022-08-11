@@ -12,6 +12,8 @@ server:
   #  enabled: true
 
 spring:
+  mvc:
+    static-path-pattern: /static/**
   content:
     rest:
       base-uri: api

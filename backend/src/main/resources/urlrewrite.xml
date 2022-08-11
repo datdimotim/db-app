@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite
+        PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
+        "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
+<urlrewrite>
+    <rule>
+        <from>^/$</from>
+        <to type="redirect">/viewer</to>
+    </rule>
+    <rule>
+        <from>^/viewer/favicon.ico$</from>
+        <to type="forward">/static/favicon.ico</to>
+    </rule>
+    <rule>
+        <from>^/viewer/((css|fonts|icons|js)/.*)$</from>
+        <to type="forward">/static/$1</to>
+    </rule>
+    <rule>
+        <from>^/viewer(/(.*))?$</from>
+        <to type="forward">/static/index.html</to>
+    </rule>
+</urlrewrite>
