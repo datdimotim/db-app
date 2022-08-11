@@ -4,7 +4,7 @@ angular.module('filesApp', [])
     filesList.files = []; 
     
     filesList.getFilesList = function() {
-        $http.get('/files/').
+        $http.get('/api/files/').
             success(function(data, status, headers, config) {
                 if (data._embedded != undefined) {
         			filesList.files = [];
@@ -24,7 +24,7 @@ angular.module('filesApp', [])
     	var f = document.getElementById('file').files[0];
     	var file = {name: f.name, summary: filesList.summary};
     	
-    	$http.post('/files/', file).
+    	$http.post('/api/files/', file).
     		then(function(response) {
 	    		var fd = new FormData();
 	            fd.append('file', f);
