@@ -15,6 +15,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Table(
+        uniqueConstraints = {
+            @UniqueConstraint(
+                    name = "UniqFolderName",
+                    columnNames = {"parent_id", "name"})
+        })
 public class Folder {
 
     @Id

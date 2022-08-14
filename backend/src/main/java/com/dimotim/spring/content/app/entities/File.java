@@ -17,6 +17,12 @@ import org.springframework.content.commons.annotations.MimeType;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Table(
+        uniqueConstraints = {
+            @UniqueConstraint(
+                    name = "UniqFileName",
+                    columnNames = {"parent_id", "name"})
+        })
 public class File {
 
     @Id
